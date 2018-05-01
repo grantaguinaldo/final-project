@@ -1,4 +1,4 @@
-#How to Eliminate Lost Revenue Due to Poor Customer Service
+# How to Eliminate Lost Revenue Due to Poor Customer Service
 
 In 2014 NewVoiceMedia reported that U.S. businesses lose $41 billion per year due to poor customer service. 
 
@@ -42,7 +42,7 @@ Once the data was in hand, we undertook some steps to pre-process the data. This
 One representative entry for a rude and not rude review is provided below.
 
 ```
-#Rude (Class 1)
+# Rude (Class 1)
 terrible customer service came in at pm and stood in front of the register and no one bothered to say
 anything or help me for minutes there was no one else waiting for their food inside either just outside at
 the window i left and went to chickfila next door and was greeted before i was all the way inside this
@@ -51,7 +51,7 @@ workers
 ```
 
 ```
-#Not Rude (Class 0)
+# Not Rude (Class 0)
 this mcdonalds has gotten much better usually my order would be wrong every single time so i would not leave
 that window until i checked every single item i only hit up fast food once a month or so and it needs to be
 worth it also the fries used to be cold and the cheese on the burger was never melted everything was just
@@ -116,13 +116,12 @@ The knn model works on a concept of feature similarity. That is, given a new dat
 
 The support vector classifiers work by plotting each data point in n-dimensional space and then finding a hyperplane that can separate each of the points in the dataset. 
 
-##Grid Search and Cross-Validation
+## Grid Search and Cross-Validation
 
 To tune each model, we used the `grid_search` function within scikit-learn.  As noted by [Jason Brownlee](https://machinelearningmastery.com/how-to-tune-algorithm-parameters-with-scikit-learn/. 
 ):
 
 > Grid search is an approach to parameter tuning that will methodically build and evaluate a model for each combination of algorithm parameters specified in a grid. 
-
 
 Also, each time that we used grid search, we also incorporated 10-fold cross validation into the tuning method.  
 
@@ -159,16 +158,16 @@ To determine if a model is under-fitting or overfitting to the training data, we
 
 [Introduce picture of the three outcomes]
 
-###Precision 
+### Precision 
 The precision of a model is defined as the number of true positives over the sum of the number of true positives and number of false positives.  As it relates to the problem set, the recall answers the question, of all the reviews that are not rude, how many did the model predict as being not rude? 
 
-###Recall
+### Recall
 The recall of a model is defined as the number of true positives over the sum of the number of true positives and number of false negatives.  As it relates to the problem set, the recall answers the question, of all the reviews that are not rude, how many did the model predict as being not rude? 
 
-###F1 Score.
+### F1 Score.
 The F1 score is the harmonic mean of the precision and the recall scores.  The F1 score can be between zero and one with the best scores being those that are closer to one.
 
-###The use of precision and recall in the model selection process
+### The use of precision and recall in the model selection process
 The precision, recall become important metrics when it comes to evaluating performance on a specific model, therefore, four outcomes exist.  
 
 **True positives (TP).**  True positives are those reviews where the model predicted that a given review was "not rude" and the review as actually labeled as "not rude".
