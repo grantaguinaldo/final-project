@@ -1,100 +1,37 @@
-# Understanding The Language Patterns Behind Restaurant Reviews
+# The Cost of Rude Service:  How Can McDonald’s can Quickly Identify Rude Customer Service using Machine learning
 
-![](./images/jay-wennington-2065-unsplash.jpg)
-
-For the final group project, we will use natural language processing to discover patterns within the [Yelp Academic Dataset](https://www.kaggle.com/yelp-dataset/yelp-dataset).
-
-As a whole, the dataset contains: 
-
-* 5,200,000 user reviews;
-* Information on 174,000 businesses; and 
-* The data spans 11 metropolitan areas.
-
-> What can we learn about the language patterns used to give five-star ratings at restaurants as compared to one-star ratings.  
-> 
-> In addition, we will also make recommendations/changes that business can make to ad-copy to encourage five-star reviews at restaurants.
-
-This project is directly motivated by the fact that online reviews have become a core tool in the decisions that people make about businesses.  Because of this, we are interested in what insight, if any, can be extracted by the free-form text by people using the Yelp platform that will allow a business to *coax* reviews to leave a five-star review. 
-
-To answer these two over arching questions, this project will answer the gather insight into the following.
-
-* First, what are the **top ten tokens** that are used when giving a restaurant a 5-, 4-, 3-, 2- or 1-star review. 
-
-* Second, what are the **top 10 n-grams** that are used when giving a restaurant a 5-, 4-, 3-, 2- or 1-star review.
-
-* Third, can we train a multi-class classifier to predict the number of stars that a user will give a restaurant?
-
-* Fourth, is there a relationship between the **length of a review and the number of stars** awarded to a single restaurant?
-
-* Fifth, when it comes to restaurants in Los Angeles, where are the local hotbeds?
-
-* Sixth, is there a relationship between the sentiment of a review and the number of stars given or the length of the review?  
-
-As an optional question, we may also do a topic model in an attempt to find *topics* that may exists in the dataset.
-
-### Tech Stack
-
-This project will using the following technologies.
-
-* MySQL
-* Python
-* Pandas
-* SK Learn
-* Flask
-* Keras
-* Heroku
-* JavaScript
-* HTML/CSS/Bootstrap
-* Numpy
-* Matplotlib/Seaborn
-* Jupyter Notebook
-* Plotly
-
-## Team Members and Location of Repo
-The project team includes four members. The proposed team name is "Reading Between The Lines."
-
-* Felipe Sinohui
-* Grant Aguinaldo
-
-The repo for this project can be found here. To ensure that we have no issues with version control, we will be the common pull/branch/merge workflow for git. For more on using git, you can check out the YouTube video below or by clicking here.
-
-## Presentation
-
-The presentation for this project will be in the form of a **slide deck** as well as a **web-hosted app**.  The slide deck will frame the overall problem statement and present the result of a brief explore data analysis (EDA).
-
-## Work Breakdown
-
-This project will be broken down into several components.
-
-### 1.  Loading the dataset into MySQL
-
-The data for this project will come from [Yelp.com](https://www.yelp.com/dataset/documentation/sql) in the form a SQL dump.  
-
-### 2.  Understand the dataset within the context of the problem statement.
-
-Using the schema, preform preliminary queries of the database to understand what data is included in the database.  For example, we may need to do multiple joins to get the data we need.  In addition, I have a feeling that the city of Los Angeles is not included in the dataset.  Therefore, we need to know what data is included in order to adjust our scope accordingly. 
-
-We will commit the SQL queries to github so that we both have access to the query since we won't be able to both access any views that we create.
-
-### 3.  Extract the necessary data from the dataset to complete questions 1 and 2.
-
-This can be either done as a separate step or after we have a trained model since classifiers like multinomial naive bays will expose an attribute that will give us a distribution of the tokens in each class. We will need to decide weather we want to use a simple bag-of-words or TFIDF.
-
-* What are the **top ten tokens** that are used when giving a restaurant a 5-, 4-, 3-, 2- or 1-star review. 
-
-* What are the **top ten n-grams** (to be decided) that are used when giving a restaurant a 5-, 4-, 3-, 2- or 1-star review.
-
-### 4.  Train a classifier to predict the star rating as a function of the review text.
-For the classifier, we will initially test a few classification algorithms:  logistic regression, naive bays, k-NN and a possibly neural network. Once we find the one that has the best accuracy, we will proceed with the front end, using the given model. At this point, I predict that the model accuracy will not be > 50%. 
-
-### 5.  Build slide deck using Google Slides.
-
-When it comes to the slide deck, we will follow the flow that is being used within this proposal.  The core part of our presentation is to tell a story about exposing the language patterns that are used when rating a restaurant. 
-
-This slide deck will present statistics of thea overall dataset, as well as the results from the EDA.
-
-### 6.  Build web app that loads the trained classifier and predicts the star rating in real-time (or as close to real-time as is possible).
-
-More will be provided on this later, however, an initial wireframe of the app is shown below.
+**By: [Felipe Sinohui](https://www.linkedin.com/in/felipesinohui/), and [Grant Aguinaldo](https://www.linkedin.com/in/grantaguinaldo/)**
 
 ***
+
+In [2017 NewVoiceMedia](https://www.newvoicemedia.com/blog/the-62-billion-customer-service-scared-away-infographic) reported that U.S. businesses lose $62 billion per year due to poor customer service. In 2011, [Accenture](https://www.accenture.com/us-en/new-applied-now) estimated that 67% of customers have no problem with switching providers due to poor customer service which includes's unhelpful/rude staff.
+
+From these statistics, there is a clear relationship between customer service and lost revenue.  Also, any efforts that can identify when is a customer receiving poor customer service is of great interest to businesses who want to reduce the amount of revenue lost by poor customer service.
+
+This project uses machine learning and the scikit-learn library to tune five models that can be used to predict when are McDonald's customers encountering poor customer service based of off text reviews.  
+
+Specifically, we are answering this problem statement:
+
+>Can a machine learning model be developed and tuned in a testing environment to predict if customers are encountering rude service.  
+
+When implemented at scale, a customer service analyst would be able to investigate all instances where the model predicted rude service by McDonald's employees and make recommendations to the front-line and upper management to improve customer service.
+
+The data used to train the models for this project came from [Figure-Eight.com](https://www.figure-eight.com/wp-content/uploads/2016/03/McDonalds-Yelp-Sentiment-DFE.csv).  
+
+This dataset included a total of 1,525 labeled reviews.  Each review represents an encounter with McDonald's staff at a specific location.  To label each review, an analyst reviewed each and identified (labeled) the policy violations that have occurred that include: rude service, slow service, a problem with an order, bad food, bad, neighborhood, dirty location, cost, and missing items. 
+
+Once we cleaned the data and encoding only the reviews that were labeled as being "rude," we created the training and testing subsets to train our models.  During the training phase, we followed a standard workflow to train each of the five machine learning models that included: 
+
+* Vectorizing the text data;
+* Instantiating a model;
+* Using grid search to find the optimal hyperparameters for each model;
+* Refitting training data to the optimized model;
+* Predicting the classes from the testing data;
+* Evaluating model performance using model evaluation metrics; and 
+* Evaluating the fit of the model.
+
+Out of the five total models that we trained, the model that afforded the best results was the Multinomial Naive Bayes/CountVectorizer model. We selected this model since it provided the highest recall score (for rude reviews) out of all of the models tested at 70% (range from 1.3 to 70%).  
+
+By using a high recall model, that is, a model that minimizes the number of instances where the model predicted that a review was "not rude," but the review was actually "rude," we are ensuring that all reviews that are classified as rude are being reviewed by the analyst.
+
+In summary, we have built a machine learning model that can predict if a customer is encountering rude customer service solely based on a text review provided by the customer. Our model uses a Multinomial Naive Bayes model that affords a high recall to ensure that all rude reviews are examined so that changes to the operation can be made promptly to avoid losses in revenue.  
